@@ -1,0 +1,3 @@
+[submodule "skills/x-research"]
+	path = skills/x-research
+	url = https://github.com/rohunvora/x-research-skill.git
