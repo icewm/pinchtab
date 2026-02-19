@@ -9,12 +9,16 @@ set -euo pipefail
 #   OC_BROWSER_WAIT_INTERVAL (default 2)
 #   OC_PROFILE (default openclaw)
 #   OC_GATEWAY_LOG (default /tmp/openclaw/openclaw-$(date +%F).log)
+#   OC_BROWSER_OPEN_RETRIES (default 2)
+#   OC_BROWSER_OPEN_RETRY_DELAY (default 5)
 
 URL=${1:-}
 TIMEOUT=${OC_BROWSER_WAIT_TIMEOUT:-40}
 INTERVAL=${OC_BROWSER_WAIT_INTERVAL:-2}
 PROFILE=${OC_PROFILE:-openclaw}
 LOGFILE=${OC_GATEWAY_LOG:-/tmp/openclaw/openclaw-$(date +%F).log}
+RETRIES=${OC_BROWSER_OPEN_RETRIES:-2}
+RETRY_DELAY=${OC_BROWSER_OPEN_RETRY_DELAY:-5}
 
 elapsed=0
 ready=0
@@ -36,6 +40,17 @@ fi
 echo "Browser control service ready."
 
 if [ -n "$URL" ]; then
-  # Use OpenClaw CLI to open URL via browser tool
-  openclaw browser open --profile "$PROFILE" --url "$URL"
+  # Use OpenClaw CLI to open URL via browser tool (with retries)
+  attempt=0
+  while true; do
+    if openclaw browser open --profile "$PROFILE" --url "$URL"; then
+      break
+    fi
+    attempt=$((attempt + 1))
+    if [ "$attempt" -gt "$RETRIES" ]; then
+      echo "Browser open failed after ${RETRIES} retries" >&2
+      exit 3
+    fi
+    sleep "$RETRY_DELAY"
+  done
 fi
