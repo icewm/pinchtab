@@ -94,6 +94,28 @@ curl http://127.0.0.1:9867/screenshot
 - 使用 HTTP API 导航、抓取快照/文本/截图
 - 默认使用持久化 profile：`~/.pinchtab/chrome-profile`
 
+### 本地模型慢速优化（避免超时）
+
+仓库提供 `tools/` 脚本，减少反复重启与等待超时：
+
+```bash
+# 启动 Pinchtab（已健康则跳过）
+./tools/pinchtab-start.sh
+
+# 等待 Gateway 就绪后自动打开 URL
+PINCHTAB_OPEN_URL=https://www.google.com \
+./tools/pinchtab-start.sh
+```
+
+可调参数：
+- `PINCHTAB_STARTUP_TIMEOUT`（默认 30s）
+- `PINCHTAB_HEALTH_INTERVAL`（默认 2s）
+- `PINCHTAB_OPEN_URL`（可选）
+- `OC_BROWSER_WAIT_TIMEOUT`（默认 40s）
+- `OC_BROWSER_WAIT_INTERVAL`（默认 2s）
+- `OC_BROWSER_OPEN_RETRIES`（默认 2）
+- `OC_BROWSER_OPEN_RETRY_DELAY`（默认 5s）
+
 ## 登录与持久化
 
 - 默认 profile：`~/.pinchtab/chrome-profile`

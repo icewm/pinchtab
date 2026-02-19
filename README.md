@@ -95,6 +95,31 @@ This repo includes **pinch.skill** so OpenClaw agents can use Pinchtab directly.
 - Navigates via HTTP API
 - Uses persistent profile `~/.pinchtab/chrome-profile`
 
+### Local model optimization (avoid timeouts)
+
+When local models are slow, startup + browser control can time out. This repo ships
+helper scripts in `tools/` to keep Pinchtab running and wait for Gateway readiness:
+
+```bash
+# Start Pinchtab (skip restart if already healthy)
+./tools/pinchtab-start.sh
+
+# Optional: wait for Gateway browser control ready, then open URL
+PINCHTAB_OPEN_URL=https://www.google.com \
+./tools/pinchtab-start.sh
+```
+
+Environment variables:
+- `PINCHTAB_STARTUP_TIMEOUT` (default 30s)
+- `PINCHTAB_HEALTH_INTERVAL` (default 2s)
+- `PINCHTAB_OPEN_URL` (optional, triggers wait+open)
+
+Gateway wait helper (used by pinchtab-start):
+- `OC_BROWSER_WAIT_TIMEOUT` (default 40s)
+- `OC_BROWSER_WAIT_INTERVAL` (default 2s)
+- `OC_BROWSER_OPEN_RETRIES` (default 2)
+- `OC_BROWSER_OPEN_RETRY_DELAY` (default 5s)
+
 For Chinese docs, see: **docs/README.zh.md**
 
 ## Login & Persistence
