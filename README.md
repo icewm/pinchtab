@@ -74,6 +74,28 @@ curl http://127.0.0.1:9867/snapshot?filter=interactive
 curl http://127.0.0.1:9867/screenshot
 ```
 
+## OpenClaw Skill（pinch）
+
+本仓库提供 **pinch.skill**，用于让 OpenClaw 智能体直接学会使用 Pinchtab 打开链接/搜索。
+
+### 使用方式
+
+1. 下载 `pinch.skill`
+2. 导入到你的 OpenClaw Skills 目录（或通过 OpenClaw 的 skill 安装方式加载）
+3. 在对话中使用以下指令：
+   - `/pinch <URL>`：用 Pinchtab 打开链接
+   - “用 pinchtab 打开 <URL>”
+   - “用 pinchtab 搜索 <关键词>” → 默认 Bing 搜索
+
+### Skill 行为说明
+
+- 自动检查 Pinchtab 是否运行（/health）
+- 必要时先启动 Pinchtab（有头模式）
+- 使用 HTTP API 导航、抓取快照/文本/截图
+- 默认使用持久化 profile：`~/.pinchtab/chrome-profile`
+
+如果需要定制启动脚本（DISPLAY、profile 路径等），可修改你的本地脚本或环境变量。
+
 ## 登录与持久化
 
 - 默认 profile：`~/.pinchtab/chrome-profile`
