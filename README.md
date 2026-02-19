@@ -1,6 +1,6 @@
 # pinchtab
 
-A lightweight HTTP browser bridge for AI automation and visible debugging.
+**Description:** A lightweight HTTP browser bridge for AI automation and visible debugging.
 
 - 12MB Go binary, zero config
 - Control Chrome via HTTP
