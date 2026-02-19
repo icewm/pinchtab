@@ -1,5 +1,7 @@
 # pinchtab
 
+**English** | [中文](docs/README.zh.md)
+
 **Description:** A lightweight HTTP browser bridge for AI automation and visible debugging.
 
 - 12MB Go binary, zero config
