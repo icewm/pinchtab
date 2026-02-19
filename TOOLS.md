@@ -2,7 +2,21 @@
 
 ## 浏览器（2026-02-11）
 
-**独立有头模式 Chrome 启动命令：**
+### ✅ Pinchtab（首选，有头）启动脚本（2026-02-19）
+```bash
+/home/icewm/.openclaw/workspace/tools/pinchtab-start.sh
+```
+
+**脚本内容要点：**
+- 预设 `DISPLAY=:0`
+- 启动命令：`/usr/local/bin/pinchtab`
+- 日志：`/tmp/pinchtab.log`
+- 健康检查：`http://127.0.0.1:9867/health`
+- 默认 profile：`~/.pinchtab/chrome-profile`（持久化登录）
+
+---
+
+**独立有头模式 Chrome 启动命令（备用）：**
 ```bash
 PIDFILE=/tmp/openclaw-chrome.pid
 if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then

@@ -13,10 +13,16 @@
 ## 单位偏好（2026-02-14）
 - 用户要求：**单位统一使用公制**（温度℃、风速km/h等）
 
-## 浏览器搜索方式（2026-02-11）⭐
-- 用户明确要求：所有网页搜索统一使用 **有头模式本地独立浏览器**
-- **全局默认**：凡涉及浏览器/网页搜索，一律使用 TOOLS.md 中记录的本地有头 Chrome 启动方式与 `profile="openclaw"`
-- 配置路径：
+## 浏览器搜索方式（2026-02-19）⭐
+- 用户最新要求：**Pinchtab 为主**，本地有头 Chrome（TOOLS.md 的 openclaw profile）作为补充方式。
+- 默认策略：涉及网页搜索/浏览 **优先使用 Pinchtab**；若 Pinchtab 不适用或用户明确要求，则使用本地有头 Chrome。
+- Pinchtab 有头默认启动脚本：`/home/icewm/.openclaw/workspace/tools/pinchtab-start.sh`
+  - 预设 `DISPLAY=:0`
+  - 启动命令：`/usr/local/bin/pinchtab`
+  - 日志：`/tmp/pinchtab.log`
+  - 健康检查：`http://127.0.0.1:9867/health`
+  - 持久化 profile：`~/.pinchtab/chrome-profile`
+- 本地有头 Chrome 配置（备用）：
   - Chrome 可执行文件：`/opt/google/chrome/chrome`
   - 调试端口：`18800`
   - 独立用户数据目录：`/tmp/openclaw-chrome`
@@ -30,7 +36,6 @@
     2>&1 &
   ```
 - 测试验证：`openclaw` profile 可正常加载页面并进行 UI 操作
-- **补充强调（2026-02-15）**：无论何时执行搜索/网页浏览，都必须优先使用上述本地独立浏览器；不要切换到其他搜索工具或非本地浏览器流程。
 
 ## 已知问题（2026-02-11）
 - OpenClaw 系统提示缺少 `openai`、`google`、`voyage` 的 API key（不影响当前任务）
