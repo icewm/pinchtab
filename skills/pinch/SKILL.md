@@ -1,6 +1,6 @@
 ---
 name: pinch
-description: Use Pinchtab (HTTP browser bridge) to open links or run searches when the user says “/pinch <url>”, “用pinchtab打开…”, or “用pinchtab搜索…”. This skill starts Pinchtab if needed, checks /health, opens a URL or search results, and can snapshot/text/screenshot via the Pinchtab HTTP API.
+description: Use Pinchtab (HTTP browser bridge) to open links or run searches when the user says “/pinch URL”, “用pinchtab打开…”, or “用pinchtab搜索…”. This skill starts Pinchtab if needed, checks /health, opens a URL or search results, and can snapshot/text/screenshot via the Pinchtab HTTP API.
 ---
 
 # Pinch
