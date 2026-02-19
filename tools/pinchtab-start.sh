@@ -30,6 +30,10 @@ done
 
 if [ "$ready" -eq 1 ]; then
   echo "Pinchtab started. Health check OK. Logs: /tmp/pinchtab.log"
+  # Optional: wait for Gateway browser control readiness, then open URL
+  if [ -n "${PINCHTAB_OPEN_URL:-}" ]; then
+    /home/icewm/.openclaw/workspace/tools/openclaw-browser-wait.sh "$PINCHTAB_OPEN_URL" || true
+  fi
 else
   echo "Pinchtab started, but health check not ready within ${STARTUP_TIMEOUT}s. Logs: /tmp/pinchtab.log"
 fi
