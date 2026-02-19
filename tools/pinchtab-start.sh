@@ -6,10 +6,15 @@ set -euo pipefail
 
 export DISPLAY=${DISPLAY:-:0}
 
+if curl -s --max-time 1 http://127.0.0.1:9867/health | grep -q '"status":"ok"'; then
+  echo "Pinchtab already running. Health check OK."
+  exit 0
+fi
+
 nohup /usr/local/bin/pinchtab >/tmp/pinchtab.log 2>&1 &
 
 # Bounded health-check loop to avoid long hangs (helps when local model is slow)
-STARTUP_TIMEOUT=${PINCHTAB_STARTUP_TIMEOUT:-20}
+STARTUP_TIMEOUT=${PINCHTAB_STARTUP_TIMEOUT:-30}
 INTERVAL=${PINCHTAB_HEALTH_INTERVAL:-2}
 elapsed=0
 ready=0
